@@ -6,8 +6,8 @@ import Link from 'next/link';
 
 const RegisterPage = () => {
   return (
-    <Container sx={{padding: "50px"}}>
-      <Stack sx={{justifyContent: "center", alignItems: "center", minHeight: "90vh"}}>
+    <Container>
+      <Stack sx={{justifyContent: "center", alignItems: "center", minHeight: "100vh", padding: "50px"}}>
         <Box sx={{
           width: "100%",
           maxWidth: 500,
@@ -32,7 +32,7 @@ const RegisterPage = () => {
           <Box my={2}>
             <Grid container spacing={2}>
               <Grid item md={12}>
-              <TextField id="outlined-basic" label="Outlined" variant="outlined" fullWidth={true} size='small' />
+              <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth={true} size='small' />
               </Grid>
               <Grid item md={6}>
               <TextField id="outlined-basic" type='email' label="Email" variant="outlined" fullWidth={true} size='small' />
