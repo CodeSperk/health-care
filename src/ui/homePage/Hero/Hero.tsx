@@ -33,8 +33,8 @@ const Hero = () => {
         <Typography mt={2} variant="h6" component="p" sx={{maxWidth: "600px"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, deleniti obcaecati. Cum magnam architecto dignissimos cumque itaque aliquam voluptate vitae.</Typography>
 
         <Box mt={4}>
-        <Button sx={{textTransform: "uppercase", fontWeight: 500}}>Make Appointment</Button>
-        <Button sx={{textTransform: "uppercase", fontWeight: 500, ml: 2, '&:hover': {
+        <Button sx={{textTransform: "uppercase"}}>Make Appointment</Button>
+        <Button sx={{textTransform: "uppercase", ml: 2, '&:hover': {
       bgcolor: "primary.main",
       color:"white" 
     }, }} variant="outlined">Contact Us</Button>

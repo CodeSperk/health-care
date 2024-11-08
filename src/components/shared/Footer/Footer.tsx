@@ -9,7 +9,7 @@ import twiteerIcon from '@/assets/landing_page/twitter.png'
 
 const Footer = () => {
   return (
-    <Box bgcolor="#172634" py={6}>
+    <Box bgcolor="#172634" py={6} mt={10}>
       <Container >
       <Stack direction="row" gap={4} justifyContent="center">
           <Typography component={Link} href='/plans' color="#fff">Health Plans</Typography>
