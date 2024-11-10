@@ -5,7 +5,6 @@ const HomePage = () => {
   return (
     <div>
       Hello world
-      <Button>Outlined</Button>
     </div>
   );
 };
