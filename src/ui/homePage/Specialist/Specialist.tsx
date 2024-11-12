@@ -8,7 +8,7 @@ const Specialist = async () => {
   return (
     <Container sx={{mt: 28,}}>
       <Typography variant="h4" fontWeight={600}>Explore Treatments Across Specialist</Typography>
-      <Typography component="p" fontSize={18}>Experienced Doctors Across All Specialist</Typography>
+      <Typography component="p" mt={1} fontSize={18}>Experienced Doctors Across All Specialist</Typography>
 
       <Stack direction="row" gap={4} justifyContent="space-between" mt={6}>
         {
