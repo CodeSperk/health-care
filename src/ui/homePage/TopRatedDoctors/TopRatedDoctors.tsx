@@ -19,14 +19,12 @@ const TopRatedDoctors = async () => {
   return (
     <Box
       my={10}
-      py={40}
+      py={30}
       sx={{
         backgroundColor: "rgba(20, 20, 20, 0.1)",
         clipPath: "polygon(0 0, 100% 25%, 100% 100%, 0 75%)",
       }}
     >
-      
-
       <Container >
       <Box sx={{ textAlign: "center", maxWidth: "60%", margin: "0 auto" }}>
         <Typography variant="h4" component="h1" fontWeight={600}>
@@ -40,7 +38,7 @@ const TopRatedDoctors = async () => {
         <Grid container spacing={4} sx={{margin: "30px auto"}} >
           {doctors.map((doctor: any) => (
             <Grid item xs={6} md={4} key={doctor.id}>
-              <Card >
+              <Card>
                 <Box>
                   <Image alt="doctor" src={doctor.profilePhoto} width={500} height={100}/>
                 </Box>
@@ -48,7 +46,6 @@ const TopRatedDoctors = async () => {
                   <Typography gutterBottom variant="h5" component="div">
                     {doctor.name}
                   </Typography>
-
                   <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     {doctor.qualification} , {doctor.designation}
                   </Typography>
