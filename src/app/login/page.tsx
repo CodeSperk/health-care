@@ -1,11 +1,35 @@
+"use client"
+
 import { Box, Button, Container, Grid, Stack, TextField, Typography } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import assets from "@/assets"
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { userLogin } from '@/services/actions/userLogin';
+import { storeUserInfo } from '@/services/authService';
 
-
+export type FormValues={
+  email : string;
+  password: string
+}
 
 const LoginPage = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues> ();
+  const onSubmit: SubmitHandler<FormValues> = async (values) => {
+    try{
+     const res = await userLogin(values);
+    if(res?.data?.accessToken){
+      storeUserInfo({accessToken: res?.data?.accessToken});
+    }
+    }catch (err: any){
+      console.error(err.message);
+    }
+  }
   
   return (
     <Container>
@@ -32,12 +56,13 @@ const LoginPage = () => {
           </Stack>
           
           <Box my={2}>
+            <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
               <Grid item md={6}>
-              <TextField id="outlined-basic" type='email' label="Email" variant="outlined" fullWidth={true} size='small' />
+              <TextField id="outlined-basic" type='email' label="Email" variant="outlined" fullWidth={true} size='small' {...register("email")}/>
               </Grid>
               <Grid item md={6}>
-              <TextField id="outlined-basic" type='password' label="Password" variant="outlined" fullWidth={true} size='small' />
+              <TextField id="outlined-basic" type='password' label="Password" variant="outlined" fullWidth={true} size='small' {...register("password")}/>
               </Grid>
             </Grid> 
               <Box sx={{
@@ -47,7 +72,8 @@ const LoginPage = () => {
               }}>
                 <Typography>Forgot Password?</Typography>
               </Box>            
-            <Button fullWidth={true} sx={{my:2,}}>Register</Button>
+            <Button type='submit' fullWidth={true} sx={{my:2,}}>Register</Button>
+            </form>
             <Box textAlign="center" >
             <Typography variant="h6" sx={{
                 mt: 1,
