@@ -2,7 +2,11 @@ import { Box, Button, Container, Grid, Stack, TextField, Typography } from '@mui
 import Image from 'next/image';
 import Link from 'next/link';
 import assets from "@/assets"
+
+
+
 const LoginPage = () => {
+  
   return (
     <Container>
       <Stack sx={{justifyContent: "center", alignItems: "center", minHeight: "100vh", padding: "50px"}}>
@@ -40,12 +44,9 @@ const LoginPage = () => {
                 textAlign:"end",
                 my: 1,
                 cursor: "pointer",
-                
               }}>
-                <Typography>Forgot Password</Typography>
-              </Box>
-
-            
+                <Typography>Forgot Password?</Typography>
+              </Box>            
             <Button fullWidth={true} sx={{my:2,}}>Register</Button>
             <Box textAlign="center" >
             <Typography variant="h6" sx={{
