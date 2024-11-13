@@ -6,13 +6,17 @@ import React from 'react';
 import assets from '@/assets';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from "react-hook-form"
+import { modifyPayload } from '@/utils/modifyPayload';
 
-type Inputs = {
+interface IPatientData{
   name: string;
   email: string;
-  password: string;
-  number: string;
+  contactNumber: string;
   address: string;
+}
+interface IPatientRegisterFormData{
+  password: string;
+  patient: IPatientData;
 }
 
 const RegisterPage = () => {
@@ -21,8 +25,11 @@ const RegisterPage = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  } = useForm<IPatientRegisterFormData>()
+  const onSubmit: SubmitHandler<IPatientRegisterFormData> = (values) => {
+    const data = modifyPayload(values);
+    console.log(data)
+  }
   return (
     <Container>
       <Stack sx={{justifyContent: "center", alignItems: "center", minHeight: "100vh", padding: "50px"}}>
@@ -51,19 +58,19 @@ const RegisterPage = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
               <Grid item md={12}>
-              <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth={true} size='small' {...register("name")}/>
+              <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth={true} size='small' {...register("patient.name")}/>
               </Grid>
               <Grid item md={6}>
-              <TextField id="outlined-basic" type='email' label="Email" variant="outlined" fullWidth={true} size='small' {...register("email", {required: true})}/>
+              <TextField id="outlined-basic" type='email' label="Email" variant="outlined" fullWidth={true} size='small' {...register("patient.email", {required: true})}/>
               </Grid>
               <Grid item md={6}>
               <TextField id="outlined-basic" type='password' label="Password" variant="outlined" fullWidth={true} size='small' {...register("password", {required: true})}/>
               </Grid>
               <Grid item md={6}>
-              <TextField id="outlined-basic" type='tel' label="Contact No." variant="outlined" fullWidth={true} size='small' {...register("number", {required: true})}/>
+              <TextField id="outlined-basic" type='tel' label="Contact No." variant="outlined" fullWidth={true} size='small' {...register("patient.contactNumber", {required: true})}/>
               </Grid>
               <Grid item md={6}>
-              <TextField id="outlined-basic" type='text' label="Address" variant="outlined" fullWidth={true} size='small' {...register("address")}/>
+              <TextField id="outlined-basic" type='text' label="Address" variant="outlined" fullWidth={true} size='small' {...register("patient.address")}/>
               </Grid>
 
             </Grid>
@@ -77,7 +84,6 @@ const RegisterPage = () => {
               </Typography>
             </Box>
           </Box>
-            
         </Box>
       </Stack>
     </Container>
