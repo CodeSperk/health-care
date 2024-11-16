@@ -11,7 +11,6 @@ const Navbar = () => {
       <Stack py={2} direction='row' justifyContent="space-between" alignItems="center">
         <Typography variant='h4' component={Link} href='/' fontWeight={600}><Box component="span" color="primary.main">Health</Box>Care</Typography>
 
-
         <Stack direction="row" gap={4} justifyContent="space-between">
           <Typography component={Link} href='/plans'>Health Plans</Typography>
           <Typography component={Link} href='/consultation'>Consultation</Typography>
