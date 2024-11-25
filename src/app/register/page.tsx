@@ -155,7 +155,7 @@ const RegisterPage = () => {
             <Typography variant="h6" sx={{
                 mt: 1,
               }}>
-                Do you already have account? <Link className='text-blue-500' href="/login">Login</Link>
+                Do you already have account? <Link style={{color: "#1586FD"}} href="/login">Login</Link>
               </Typography>
             </Box>
           </Box>

@@ -116,7 +116,8 @@ const LoginPage = () => {
             <Typography variant="h6" sx={{
                 mt: 1,
               }}>
-                Don&apos;t you have an account? <Link className='text-blue-500' href="/register">Register</Link>
+                Don&apos;t you have an account? <Link style={{color: "#1586FD"}} href="/register"
+                >Register</Link>
               </Typography>
             </Box>
           </Box>

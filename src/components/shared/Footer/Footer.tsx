@@ -25,7 +25,7 @@ const Footer = () => {
         <Image src={linkedInIcon} alt='Facebook' width={32} height={32}></Image>
         <Image src={twiteerIcon} alt='Facebook' width={32} height={32}></Image>
       </Stack>
-      <div className='border-b-[1px] border-dashed pt-4'></div>
+      <Box sx={{border: "1px dashed #fff", mt: 4}}></Box>
       <Stack direction="row" justifyContent="space-between" alignItems="center" pt={4}>
         <Typography component="p" color='white'>&copy;2024 HealthCare. All Rights Reserved</Typography>
         <Typography 
