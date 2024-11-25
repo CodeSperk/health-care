@@ -4,34 +4,37 @@ import { Box, Button, Container, Grid, Stack, TextField, Typography } from '@mui
 import Image from 'next/image';
 import Link from 'next/link';
 import assets from "@/assets"
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FieldValues} from 'react-hook-form';
 import { userLogin } from '@/services/actions/userLogin';
 import { storeUserInfo } from '@/services/authService';
 import { toast } from 'sonner';
-import { Router } from 'next/router';
 import { useRouter } from 'next/navigation';
+import HCForm from '@/components/Forms/HCForm';
+import HCInput from '@/components/Forms/HCInput';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 
-export type FormValues={
-  email : string;
-  password: string
-}
+export const validationSchema = z.object({
+  email: z.string().email("Please enter a vaid email address!"),
+  password: z.string().min(6, "Minimum 6 character")
+})
 
 const LoginPage = () => {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<FormValues> ();
-  const onSubmit: SubmitHandler<FormValues> = async (values) => {
+  const [error, setError] = useState("");
+ 
+  const handleLogin = async (values: FieldValues) => {
     try{
      const res = await userLogin(values);
-    if(res?.data?.accessToken){
+      if(res?.data?.accessToken){
+        setError("");
       toast.success(res?.message);
       storeUserInfo({accessToken: res?.data?.accessToken});
       router.push("/")
-    }
+      }else{
+        setError(res.message);
+      }
     }catch (err: any){
       console.error(err.message);
     }
@@ -60,15 +63,44 @@ const LoginPage = () => {
               </Typography>
             </Box>
           </Stack>
-          
+          <Box>
+           {error && 
+            <Typography sx={{
+            backgroundColor: "rgba(255,0,0, 0.1)",
+            padding: "2px",
+            color: "rgba(255,0,0, 0.7)",
+            borderRadius: "2px",
+            mt: 2,
+            textAlign: "center"
+            }}>{error}</Typography>}
+          </Box> 
+
+
           <Box my={2}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <HCForm 
+              onSubmit = {handleLogin} 
+              resolver={zodResolver(validationSchema)} 
+              defaultValues={{
+                email:"",
+                password:""
+              }}
+              >
             <Grid container spacing={2}>
               <Grid item md={6}>
-              <TextField id="outlined-basic" type='email' label="Email" variant="outlined" fullWidth={true} size='small' {...register("email")}/>
+              <HCInput 
+              name='email' 
+              type='email' 
+              label="Email" 
+              fullWidth={true}
+               />
               </Grid>
               <Grid item md={6}>
-              <TextField id="outlined-basic" type='password' label="Password" variant="outlined" fullWidth={true} size='small' {...register("password")}/>
+              <HCInput 
+              name='password' 
+              type='password' 
+              label="Password" 
+              fullWidth={true} 
+              />
               </Grid>
             </Grid> 
               <Box sx={{
@@ -78,8 +110,8 @@ const LoginPage = () => {
               }}>
                 <Typography>Forgot Password?</Typography>
               </Box>            
-            <Button type='submit' fullWidth={true} sx={{my:2,}}>Register</Button>
-            </form>
+            <Button type='submit' fullWidth={true} sx={{my:2,}}>Login</Button>
+            </HCForm>
             <Box textAlign="center" >
             <Typography variant="h6" sx={{
                 mt: 1,
