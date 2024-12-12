@@ -35,7 +35,7 @@ const Specialist = async () => {
                 transition: 700,
               }
             }}>
-              <Image src={specialty.icon} alt="specialty icon" width={100} height={100}></Image>
+              <Image src={specialty.icon || ""} alt="specialty icon" width={100} height={100}></Image>
               <Typography component="p">{specialty.title}</Typography>
             </Box>
           ))
